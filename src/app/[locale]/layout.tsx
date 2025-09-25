@@ -5,6 +5,8 @@ import { notFound } from "next/navigation";
 import { getMessages, setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import "../globals.css";
+import { ThemeProvider } from "@/components/ThemeProvider";
+import { Navigation } from "@/components/Navigation";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -42,13 +44,23 @@ export default async function RootLayout({
     const messages = await getMessages({ locale });
 
     return (
-        <html lang={locale}>
+        <html lang={locale} suppressHydrationWarning>
             <body
                 className={`${geistSans.variable} ${geistMono.variable} antialiased`}
             >
-                <NextIntlClientProvider locale={locale} messages={messages}>
-                    {children}
-                </NextIntlClientProvider>
+                <ThemeProvider
+                    attribute="class"
+                    defaultTheme="system"
+                    enableSystem
+                    disableTransitionOnChange
+                >
+                    <NextIntlClientProvider locale={locale} messages={messages}>
+                        <Navigation />
+                        <main className="font-sans min-h-screen px-4 sm:px-6 lg:px-8">
+                            {children}
+                        </main>
+                    </NextIntlClientProvider>
+                </ThemeProvider>
             </body>
         </html>
     );
