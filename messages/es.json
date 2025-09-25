@@ -1,4 +1,112 @@
 {
-  "greeting": "¡Hola!",
-  "description": "Este es mi sitio estático."
+  "Home": {
+    "name": "Daniel Cruz Arciniega",
+    "title": "Ingeniero de Software Full Stack",
+    "email": "cruzarciniega.d@gmail.com",
+    "linkedin": "linkedin.com/in/daniel-cruzar",
+    "location": "Querétaro, QRO, MX",
+    "summary": "Ingeniero de Software con experiencia en desarrollo full stack, infraestructura en la nube y monitoreo de servidores en tiempo real. Habilidades comprobadas en el desarrollo y despliegue de aplicaciones web y móviles. Apasionado por la excelencia operativa, la seguridad, la confiabilidad y la eficiencia en el rendimiento. Habilidades blandas que incluyen comunicación, adaptabilidad, resolución de problemas y trabajo en equipo.",
+    "experienceTitle": "Experiencia",
+    "educationTitle": "Educación",
+    "skillsTitle": "Habilidades",
+    "projectsTitle": "Proyectos",
+    "languagesTitle": "Idiomas",
+    "certificationsTitle": "Certificaciones",
+    "contactTitle": "Contacto",
+    "downloadCV": "Descargar CV",
+    
+    "experienceList": [
+      {
+        "title": "Desarrollador Full Stack",
+        "company": "OVERCODE SOLUTIONS",
+        "period": "2024 - Presente",
+        "description": "Construir y optimizar servicios backend con Django, centrándose en el rendimiento de las consultas y la escalabilidad. Automatizar pruebas unitarias. Desarrollar y mantener aplicaciones móviles. Colaborar en un entorno de equipo utilizando Git para el control de versiones y la colaboración en el código. Participar en revisiones de código, planificación de funciones y mejora continua de los flujos de trabajo de desarrollo."
+      },
+      {
+        "title": "Analista de Datos",
+        "company": "KIO Networks",
+        "period": "2023 - 2024",
+        "description": "Optimizar consultas de Elasticsearch para recuperar métricas de servidores en tiempo real. Crear y mantener dashboards en Kibana para monitorear el rendimiento del sistema y detectar anomalías. Colaborar con los equipos de operaciones y datos para mejorar la infraestructura de monitoreo utilizando el stack ELK, apoyando flujos de trabajo de entrega continua y respuesta a incidentes."
+      },
+      {
+        "title": "Desarrollador Full Stack",
+        "company": "Freelancer",
+        "period": "2021 - 2024",
+        "description": "Entregué soluciones de software personalizadas para diferentes clientes, incluyendo NDS y Club."
+      }
+    ],
+    
+    "educationList": [
+      {
+        "degree": "Ingeniería en Sistemas Computacionales",
+        "institution": "Instituto Tecnológico y de Estudios Superiores de Monterrey (ITESM)",
+        "period": "2019 - 2024",
+        "location": "Querétaro, QRO, MX",
+        "extras": "Concentración en Analítica de Datos y Herramientas de Inteligencia Artificial"
+      }
+    ],
+    
+    "skillCategories": [
+      {
+        "category": "Programming Languages",
+        "skills": ["Python", "JavaScript", "Java", "Dart"]
+      },
+      {
+        "category": "Frontend",
+        "skills": ["React", "Next.js", "TypeScript", "JavaScript", "HTML5", "CSS3", "Tailwind CSS", "Flutter"]
+      },
+      {
+        "category": "Backend",
+        "skills": ["Django", "Node.js", "Express.js", "Spring Boot", "FastAPI", "Flask", "REST APIs"]
+      },
+      {
+        "category": "Mobile",
+        "skills": ["React Native", "Flutter", "iOS Development", "Android Development"]
+      },
+      {
+        "category": "Database",
+        "skills": ["PostgreSQL", "MongoDB", "MySQL", "Redis", "SqlLite"]
+      },
+      {
+        "category": "Cloud & DevOps",
+        "skills": ["AWS", "Docker", "Kubernetes", "CI/CD", "Git", "Jenkins"]
+      }
+    ],
+    
+    "projectsList": [
+      {
+        "name": "ChambApp - Plataforma de Trabajos",
+        "description": "Aplicación móvil para búsqueda de empleos en Nueva York",
+        "technologies": ["Flutter", "Django", "Digital Ocean", "PostgreSQL", "Redis", "Docker"],
+        "links": {
+          "playStore": "https://play.google.com/store/apps/details?id=mx.overcode.newjobs",
+          "appStore": "https://apps.apple.com/mx/app/chambapp-trabajos-nueva-york/id1494230206"
+        }
+      },
+      {
+        "name": "Sistema de Gestión de Reservaciones para Club Campestre",
+        "description": "Sistema de gestión de reservas que incluye una aplicación web para el personal y una aplicación móvil para los miembros de un club de campo. La aplicación móvil permite a los miembros rastrear su hándicap de golf registrando golpes sin necesidad de conexión a Internet.",
+        "technologies": ["React", "React Native", "Django", "Docker", "Celery", "Celery-Beat", "Redis", "Pandas", "PostgreSQL", "SQLite"]
+      },
+      {
+        "name": "Plataforma E-commerce de Coches",
+        "description": "Plataforma de e-commerce de coches. El proyecto se dividió en 4 micro-servicios (usuarios, concesionarios, coches y ventas).",
+        "technologies": ["React", "TypeScript", "Spring Boot", "Java", "Stripe", "MySQL", "Docker", "Solr", "Eureka Server", "Azure DevOps"],
+        "links": {
+          "github": "https://github.com/TC3005B-561-marzo-2023"
+        }
+      }
+    ],
+    
+    "languagesList": [
+      {
+        "language": "Inglés",
+        "level": "Fluido"
+      },
+      {
+        "language": "Español",
+        "level": "Nativo"
+      }
+    ]
+  }
 }

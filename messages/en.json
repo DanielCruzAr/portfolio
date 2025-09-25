@@ -1,4 +1,112 @@
 {
-  "greeting": "Hello!",
-  "description": "This is my static site."
+  "Home": {
+    "name": "Daniel Cruz Arciniega",
+    "title": "Full Stack Software Engineer",
+    "email": "cruzarciniega.d@gmail.com",
+    "linkedin": "linkedin.com/in/daniel-cruzar",
+    "location": "Querétaro, QRO, MX",
+    "summary": "Software Engineer with experience in full stack development, cloud infrastructure, and real-time server monitoring. Proven skills developing and deploying web and mobile applications. Passionate about operational excellence, security, reliability and performance efficiency. Soft skills including communication, adaptability, problem-solving, and teamwork.",
+    "experienceTitle": "Experience",
+    "educationTitle": "Education",
+    "skillsTitle": "Skills",
+    "projectsTitle": "Projects",
+    "languagesTitle": "Languages",
+    "certificationsTitle": "Certifications",
+    "contactTitle": "Contact",
+    "downloadCV": "Download CV",
+    
+    "experienceList": [
+      {
+        "title": "Full Stack Developer",
+        "company": "OVERCODE SOLUTIONS",
+        "period": "2024 - Present",
+        "description": "Build and optimize backend services with Django, focusing on query performance and scalability. Automate unit tests. Develop and maintain mobile applications. Collaborate in a team environment using Git for version control and code collaboration. Participate in code reviews, feature planning, and continuous improvement of development workflows."
+      },
+      {
+        "title": "Data Analyst",
+        "company": "KIO Networks",
+        "period": "2023 - 2024",
+        "description": "Optimize Elasticsearch queries to retrieve real-time server metrics. Create and maintain dashboards in Kibana for monitoring system performance and anomaly detection. Collaborated with operations and data teams to enhance monitoring infrastructure using the ELK stack, supporting continuous delivery and incident response workflows."
+      },
+      {
+        "title": "Full Stack Developer",
+        "company": "Freelancer",
+        "period": "2021 - 2024",
+        "description": "Delivered tailored software solutions for different clients including NDS and Club."
+      }
+    ],
+    
+    "educationList": [
+      {
+        "degree": "Bachelor of Software Engineering",
+        "institution": "Monterrey Institute of Technology and Higher Education (ITESM)",
+        "period": "2019 - 2024",
+        "location": "Querétaro, QRO, MX",
+        "extras": "Concentration in Data Analytics and Machine Learning Tools"
+      }
+    ],
+    
+    "skillCategories": [
+      {
+        "category": "Programming Languages",
+        "skills": ["Python", "JavaScript", "Java", "Dart"]
+      },
+      {
+        "category": "Frontend",
+        "skills": ["React", "Next.js", "TypeScript", "JavaScript", "HTML5", "CSS3", "Tailwind CSS", "Flutter"]
+      },
+      {
+        "category": "Backend",
+        "skills": ["Django", "Node.js", "Express.js", "Spring Boot", "FastAPI", "Flask", "REST APIs"]
+      },
+      {
+        "category": "Mobile",
+        "skills": ["React Native", "Flutter", "iOS Development", "Android Development"]
+      },
+      {
+        "category": "Database",
+        "skills": ["PostgreSQL", "MongoDB", "MySQL", "Redis", "SqlLite"]
+      },
+      {
+        "category": "Cloud & DevOps",
+        "skills": ["AWS", "Docker", "Kubernetes", "CI/CD", "Git", "Jenkins"]
+      }
+    ],
+    
+    "projectsList": [
+      {
+        "name": "ChambApp - Job Platform",
+        "description": "Mobile application for job searching in New York",
+        "technologies": ["Flutter", "Django", "Digital Ocean", "PostgreSQL", "Redis", "Docker"],
+        "links": {
+          "playStore": "https://play.google.com/store/apps/details?id=mx.overcode.newjobs",
+          "appStore": "https://apps.apple.com/mx/app/chambapp-trabajos-nueva-york/id1494230206"
+        }
+      },
+      {
+        "name": "Country Club Reservations System",
+        "description": "Reservation management system which included a web application for staff and a mobile application for members of a country club.  The mobile application allowed members to track their golf handicap by registering shots without needing internet connection.",
+        "technologies": ["React", "React Native", "Django", "Docker", "Celery", "Celery-Beat", "Redis", "Pandas", "PostgreSQL", "SQLite"]
+      },
+      {
+        "name": "Car E-commerce",
+        "description": "Car e-commerce platform. The project was divided into 4 micro-services (users, dealers, cars & sales).",
+        "technologies": ["React", "TypeScript", "Spring Boot", "Java", "Stripe", "MySQL", "Docker", "Solr", "Eureka Server", "Azure DevOps"],
+        "links": {
+          "github": "https://github.com/TC3005B-561-marzo-2023"
+        }
+      }
+    ],
+    
+    "languagesList": [
+      {
+        "language": "English",
+        "level": "Fluent"
+      },
+      {
+        "language": "Spanish",
+        "level": "Native"
+      }
+    ]
+  }
 }
