@@ -18,8 +18,8 @@ export default function Home() {
 
     return (
         <>
+            <Navigation />
             <main className="font-sans min-h-screen px-4 sm:px-6 lg:px-8">
-                <Navigation />
                 <div className="max-w-4xl mx-auto overflow-hidden mt-32 sm:px-6 lg:px-8">
                     {/* Summary Section */}
                     <section id="home" className="flex justify-between mb-10">
