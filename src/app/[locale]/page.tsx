@@ -1,42 +1,21 @@
 "use client";
 import { useTranslations } from "next-intl";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function Home() {
+    const [loaded, setLoaded] = useState(false);
     const t = useTranslations("Home");
 
-    // Smooth scrolling for anchor links
     useEffect(() => {
-        const handleAnchorClick = (event: MouseEvent) => {
-            const target = event.target as HTMLElement;
-            
-            // Find the closest anchor element
-            const anchor = target.closest('a') as HTMLAnchorElement;
-            
-            if (anchor && anchor.getAttribute('href')?.startsWith('#')) {
-                const hash = anchor.getAttribute('href');
-                if (hash) {
-                    event.preventDefault();
-                    const element = document.querySelector(hash);
-                    if (element) {
-                        element.scrollIntoView({ 
-                            behavior: "smooth",
-                            block: "start"
-                        });
-                    }
-                }
-            }
-        }
+        setLoaded(true);
+    }, []);
 
-        document.addEventListener("click", handleAnchorClick);
-
-        return () => {
-            document.removeEventListener("click", handleAnchorClick);
-        };
-    }, [])
+    if (!loaded) {
+        return null;
+    }
 
     return (
-        <div className="max-w-4xl mx-auto overflow-hidden">
+        <div className="max-w-4xl mx-auto overflow-hidden mt-32 sm:px-6 lg:px-8">
             {/* Summary Section */}
             <section id="home" className="flex justify-between mb-10">
                 <div>
@@ -46,6 +25,7 @@ export default function Home() {
                         {t("summary")}
                     </p>
                 </div>
+                {/* TODO: Put contact info in footer */}
                 <div className="mt-6 sm:mt-0 text-right">
                     <div className="space-y-2">
                         <p>{t("location")}</p>
