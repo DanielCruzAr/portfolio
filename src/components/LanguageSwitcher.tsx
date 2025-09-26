@@ -12,5 +12,5 @@ export default function LanguageSwitcher() {
   // remove the current locale segment, then add the other
   const newPath = pathname.replace(`/${locale}`, `/${otherLocale}`);
 
-  return <Link href={newPath}>{otherLocale.toUpperCase()}</Link>;
+  return <Link href={newPath} title={`Switch to ${otherLocale.toUpperCase()}`}>{otherLocale.toUpperCase()}</Link>;
 }

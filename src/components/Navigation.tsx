@@ -7,6 +7,7 @@ import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { Button } from "./ui/button";
 import { Menu } from "lucide-react";
+import DownloadFile from "./DownloadFile";
 
 const components: { key: string; href: string }[] = [
     {
@@ -144,6 +145,7 @@ export function Navigation() {
             <div className="absolute top-4 right-8 flex justify-center items-center space-x-4">
                 <LanguageSwitcher />
                 <ModeToggle />
+                <DownloadFile />
             </div>
         </nav>
     );
