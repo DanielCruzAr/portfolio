@@ -9,7 +9,11 @@ import { Button } from "@/components/ui/button";
 export function ModeToggle() {
     const { theme, setTheme } = useTheme();
     const toggleTheme = () => {
-        theme == "light" ? setTheme("dark") : setTheme("light");
+        if (theme === "light") {
+            setTheme("dark");
+        } else {
+            setTheme("light");
+        }
     };
 
     return (
@@ -20,7 +24,7 @@ export function ModeToggle() {
             className="rounded-lg cursor-pointer"
             title="Toggle theme"
         >
-            {theme == "light" ? (
+            {theme === "light" ? (
                 <Sun className="h-[1.2rem] w-[1.2rem]" />
             ) : (
                 <Moon className="h-[1.2rem] w-[1.2rem]" />

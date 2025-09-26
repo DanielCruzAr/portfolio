@@ -31,11 +31,11 @@ export default async function RootLayout({
     params,
 }: Readonly<{
     children: React.ReactNode;
-    params: Promise<{ locale: "en" | "es" }>;
+    params: Promise<{ locale: string }>;
 }>) {
     const { locale } = await params;
 
-    if (!routing.locales.includes(locale)) {
+    if (!routing.locales.includes(locale as "en" | "es")) {
         return notFound();
     }
 

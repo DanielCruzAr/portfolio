@@ -4,6 +4,52 @@ import { Navigation } from "@/components/Navigation";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 
+// TypeScript interfaces for the data structures
+interface Experience {
+    title: string;
+    company: string;
+    period: string;
+    description: string;
+}
+
+interface Project {
+    name: string;
+    description: string;
+    technologies: string[];
+    links?: {
+        playStore?: string;
+        appStore?: string;
+        github?: string;
+    };
+}
+
+interface SkillCategory {
+    category: string;
+    skills: string[];
+}
+
+interface Education {
+    degree: string;
+    institution: string;
+    period: string;
+    location?: string;
+    extras?: string;
+    description?: string;
+}
+
+interface Certification {
+    title: string;
+    issuer: string;
+    year: string;
+    number: string;
+    link?: string;
+}
+
+interface Language {
+    language: string;
+    level: string;
+}
+
 export default function Home() {
     const [loaded, setLoaded] = useState(false);
     const t = useTranslations("Home");
@@ -42,7 +88,7 @@ export default function Home() {
                         <div className="space-y-6">
                             {t
                                 .raw("experienceList")
-                                .map((exp: any, index: number) => (
+                                .map((exp: Experience, index: number) => (
                                     <div
                                         key={index}
                                         className="bg-muted-foreground/10 border-l-4 border-primary/30 pl-6 pr-2 py-4 rounded-lg"
@@ -74,7 +120,7 @@ export default function Home() {
                         <div className="space-y-6">
                             {t
                                 .raw("projectsList")
-                                .map((project: any, index: number) => (
+                                .map((project: Project, index: number) => (
                                     <div
                                         key={index}
                                         className="bg-muted-foreground/10 border-l-4 border-primary/30 pl-6 pr-2 py-4 rounded-lg"
@@ -155,7 +201,7 @@ export default function Home() {
                         <div className="grid md:grid-cols-2 gap-6">
                             {t
                                 .raw("skillCategories")
-                                .map((category: any, index: number) => (
+                                .map((category: SkillCategory, index: number) => (
                                     <div
                                         key={index}
                                         className="bg-muted-foreground/10 border-l-4 border-primary/30 pl-6 pr-2 py-4 rounded-lg"
@@ -191,7 +237,7 @@ export default function Home() {
                         <div className="space-y-6">
                             {t
                                 .raw("educationList")
-                                .map((edu: any, index: number) => (
+                                .map((edu: Education, index: number) => (
                                     <div
                                         key={index}
                                         className="bg-muted-foreground/10 border-l-4 border-primary/30 pl-6 pr-2 py-4 rounded-lg"
@@ -226,7 +272,7 @@ export default function Home() {
                         <div className="space-y-6">
                             {t
                                 .raw("certificationsList")
-                                .map((cert: any, index: number) => (
+                                .map((cert: Certification, index: number) => (
                                     <div
                                         key={index}
                                         className="bg-muted-foreground/10 border-l-4 border-primary/30 pl-6 pr-2 py-4 rounded-lg"
@@ -269,7 +315,7 @@ export default function Home() {
                         <div className="grid sm:grid-cols-2 gap-4">
                             {t
                                 .raw("languagesList")
-                                .map((lang: any, index: number) => (
+                                .map((lang: Language, index: number) => (
                                     <div
                                         key={index}
                                         className="flex justify-between items-center bg-muted-foreground/10 p-4 rounded-lg"
