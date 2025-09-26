@@ -128,6 +128,12 @@
     "skills": "Habilidades",
     "education": "Educación",
     "certifications": "Certificaciones",
-    "languages": "Idiomas"
+    "languages": "Idiomas",
+    "contact": "Contacto"
+  },
+  "Footer": {
+    "email": "cruzarciniega.d@gmail.com",
+    "linkedin": "linkedin.com/in/daniel-cruzar",
+    "location": "Querétaro, QRO, MX"
   }
 }

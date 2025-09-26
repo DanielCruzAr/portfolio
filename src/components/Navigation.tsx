@@ -35,6 +35,10 @@ const components: { key: string; href: string }[] = [
         key: "languages",
         href: "#languages",
     },
+    {
+        key: "contact",
+        href: "#footer",
+    }
 ];
 
 export function Navigation() {

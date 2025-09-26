@@ -25,27 +25,6 @@ export default function Home() {
                         {t("summary")}
                     </p>
                 </div>
-                {/* TODO: Put contact info in footer */}
-                <div className="mt-6 sm:mt-0 text-right">
-                    <div className="space-y-2">
-                        <p>{t("location")}</p>
-                        <a
-                            href={`mailto:${t("email")}`}
-                            className="block hover:text-primary/50 transition-colors"
-                        >
-                            {t("email")}
-                        </a>
-                        <a
-                            href={`https://${t("linkedin")}`}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="block hover:text-primary/50 transition-colors"
-                        >
-                            {t("linkedin")}
-                        </a>
-                        <p>(+52) 4423516835</p>
-                    </div>
-                </div>
             </section>
 
             {/* Experience Section */}

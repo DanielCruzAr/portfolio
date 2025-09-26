@@ -7,6 +7,7 @@ import { routing } from "@/i18n/routing";
 import "../globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { Navigation } from "@/components/Navigation";
+import Footer from "@/components/Footer";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -59,6 +60,7 @@ export default async function RootLayout({
                         <main className="font-sans min-h-screen px-4 sm:px-6 lg:px-8">
                             {children}
                         </main>
+                        <Footer />
                     </NextIntlClientProvider>
                 </ThemeProvider>
             </body>
