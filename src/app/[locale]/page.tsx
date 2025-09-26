@@ -7,7 +7,7 @@ export default function Home() {
     return (
         <div className="max-w-4xl mx-auto overflow-hidden">
             {/* Summary Section */}
-            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center">
+            <section id="home" className="flex justify-between mb-10">
                 <div>
                     <h1 className="text-4xl font-bold mb-2">{t("name")}</h1>
                     <p className="text-xl mb-4">{t("title")}</p>
@@ -20,7 +20,7 @@ export default function Home() {
                         <p>{t("location")}</p>
                         <a
                             href={`mailto:${t("email")}`}
-                            className="block hover:text-foreground transition-colors"
+                            className="block hover:text-primary/50 transition-colors"
                         >
                             {t("email")}
                         </a>
@@ -32,33 +32,34 @@ export default function Home() {
                         >
                             {t("linkedin")}
                         </a>
+                        <p>(+52) 4423516835</p>
                     </div>
                 </div>
-            </div>
+            </section>
 
             {/* Experience Section */}
-            <section className="mb-10">
-                <h2 className="text-2xl font-bold text-gray-800 mb-6 border-b-2 border-blue-600 pb-2">
+            <section id="experience" className="mb-10">
+                <h2 className="text-2xl font-bold mb-6 border-b-2 border-primary pb-2">
                     {t("experienceTitle")}
                 </h2>
                 <div className="space-y-6">
                     {t.raw("experienceList").map((exp: any, index: number) => (
                         <div
                             key={index}
-                            className="border-l-4 border-blue-200 pl-6"
+                            className="bg-muted-foreground/10 border-l-4 border-primary/30 pl-6 pr-2 py-4 rounded-lg"
                         >
                             <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-2">
-                                <h3 className="text-xl font-semibold text-gray-800">
+                                <h3 className="text-xl font-semibold">
                                     {exp.title}
                                 </h3>
-                                <span className="text-gray-600 text-sm">
+                                <span className="text-sm">
                                     {exp.period}
                                 </span>
                             </div>
-                            <p className="text-blue-600 font-medium mb-1">
+                            <p className="font-medium mb-1">
                                 {exp.company}
                             </p>
-                            <p className="text-gray-700 leading-relaxed">
+                            <p className="leading-relaxed">
                                 {exp.description}
                             </p>
                         </div>
@@ -67,8 +68,8 @@ export default function Home() {
             </section>
 
             {/* Projects Section */}
-            <section className="mb-10">
-                <h2 className="text-2xl font-bold text-gray-800 mb-6 border-b-2 border-blue-600 pb-2">
+            <section id="projects" className="mb-10">
+                <h2 className="text-2xl font-bold mb-6 border-b-2 border-primary pb-2">
                     {t("projectsTitle")}
                 </h2>
                 <div className="space-y-6">
@@ -77,12 +78,12 @@ export default function Home() {
                         .map((project: any, index: number) => (
                             <div
                                 key={index}
-                                className="bg-gray-50 p-6 rounded-lg"
+                                className="bg-muted-foreground/10 border-l-4 border-primary/30 pl-6 pr-2 py-4 rounded-lg"
                             >
-                                <h3 className="text-xl font-semibold text-gray-800 mb-2">
+                                <h3 className="text-xl font-semibold mb-2">
                                     {project.name}
                                 </h3>
-                                <p className="text-gray-700 mb-3">
+                                <p className="mb-3">
                                     {project.description}
                                 </p>
                                 <div className="flex flex-wrap gap-2 mb-4">
@@ -137,8 +138,8 @@ export default function Home() {
             </section>
 
             {/* Skills Section */}
-            <section className="mb-10">
-                <h2 className="text-2xl font-bold text-gray-800 mb-6 border-b-2 border-blue-600 pb-2">
+            <section id="skills" className="mb-10">
+                <h2 className="text-2xl font-bold mb-6 border-b-2 border-primary pb-2">
                     {t("skillsTitle")}
                 </h2>
                 <div className="grid md:grid-cols-2 gap-6">
@@ -147,9 +148,9 @@ export default function Home() {
                         .map((category: any, index: number) => (
                             <div
                                 key={index}
-                                className="bg-gray-50 p-6 rounded-lg"
+                                className="bg-muted-foreground/10 border-l-4 border-primary/30 pl-6 pr-2 py-4 rounded-lg"
                             >
-                                <h3 className="text-lg font-semibold text-gray-800 mb-4">
+                                <h3 className="text-lg font-semibold mb-4">
                                     {category.category}
                                 </h3>
                                 <div className="flex flex-wrap gap-2">
@@ -157,7 +158,7 @@ export default function Home() {
                                         (skill: string, skillIndex: number) => (
                                             <span
                                                 key={skillIndex}
-                                                className="px-3 py-1 bg-white text-gray-700 text-sm rounded border"
+                                                className="px-3 py-1 bg-blue-100 text-blue-800 text-sm rounded-lg border"
                                             >
                                                 {skill}
                                             </span>
@@ -170,31 +171,31 @@ export default function Home() {
             </section>
 
             {/* Education Section */}
-            <section className="mb-10">
-                <h2 className="text-2xl font-bold text-gray-800 mb-6 border-b-2 border-blue-600 pb-2">
+            <section id="education" className="mb-10">
+                <h2 className="text-2xl font-bold mb-6 border-b-2 border-primary pb-2">
                     {t("educationTitle")}
                 </h2>
                 <div className="space-y-6">
                     {t.raw("educationList").map((edu: any, index: number) => (
                         <div
                             key={index}
-                            className="border-l-4 border-blue-200 pl-6"
+                            className="bg-muted-foreground/10 border-l-4 border-primary/30 pl-6 pr-2 py-4 rounded-lg"
                         >
                             <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-2">
-                                <h3 className="text-xl font-semibold text-gray-800">
+                                <h3 className="text-xl font-semibold">
                                     {edu.degree}
                                 </h3>
-                                <span className="text-gray-600 text-sm">
+                                <span className="text-sm">
                                     {edu.period}
                                 </span>
                             </div>
-                            <p className="text-blue-600 font-medium mb-1">
+                            <p className="font-medium mb-1">
                                 {edu.institution}
                             </p>
-                            <p className="text-gray-600 font-medium">
+                            <p className="font-medium">
                                 {edu.extras}
                             </p>
-                            <p className="text-gray-600 text-sm">
+                            <p className="text-sm">
                                 {edu.location}
                             </p>
                         </div>
@@ -203,17 +204,17 @@ export default function Home() {
             </section>
 
             {/* Languages Section */}
-            <section className="mb-10">
-                <h2 className="text-2xl font-bold text-gray-800 mb-6 border-b-2 border-blue-600 pb-2">
+            <section id="languages" className="mb-10">
+                <h2 className="text-2xl font-bold mb-6 border-b-2 border-primary pb-2">
                     {t("languagesTitle")}
                 </h2>
                 <div className="grid sm:grid-cols-2 gap-4">
                     {t.raw("languagesList").map((lang: any, index: number) => (
                         <div
                             key={index}
-                            className="flex justify-between items-center bg-gray-50 p-4 rounded-lg"
+                            className="flex justify-between items-center bg-muted-foreground/10 p-4 rounded-lg"
                         >
-                            <span className="font-medium text-gray-800">
+                            <span className="font-medium">
                                 {lang.language}
                             </span>
                             <span className="text-blue-600">{lang.level}</span>

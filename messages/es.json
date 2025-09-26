@@ -108,5 +108,12 @@
         "level": "Nativo"
       }
     ]
+  },
+  "Navigation": {
+    "home": "Inicio",
+    "experience": "Experiencia",
+    "projects": "Proyectos",
+    "skills": "Habilidades",
+    "education": "Educación"
   }
 }
