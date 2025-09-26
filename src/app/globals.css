@@ -51,3 +51,15 @@
   --color-ring: var(--ring);
   --color-muted-foreground: var(--muted-foreground);
 }
+
+/* Enable smooth scrolling globally */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Offset for fixed header if needed */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}

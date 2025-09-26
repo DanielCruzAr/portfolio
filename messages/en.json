@@ -14,6 +14,7 @@
     "certificationsTitle": "Certifications",
     "contactTitle": "Contact",
     "downloadCV": "Download CV",
+    "certificationNumber": "Certification Number",
     
     "experienceList": [
       {
@@ -43,6 +44,16 @@
         "period": "2019 - 2024",
         "location": "Querétaro, QRO, MX",
         "extras": "Concentration in Data Analytics and Machine Learning Tools"
+      }
+    ],
+
+    "certificationsList": [
+      {
+        "title": "AWS Certified Cloud Practitioner",
+        "issuer": "Amazon Web Services",
+        "year": 2025,
+        "number": "7d1104b66754419e8f34f2ec3497c136",
+        "link": "https://aws.amazon.com/verification"
       }
     ],
     
@@ -110,10 +121,12 @@
     ]
   },
   "Navigation": {
-    "home": "Home",
+    "summary": "Summary",
     "experience": "Experience",
     "projects": "Projects",
     "skills": "Skills",
-    "education": "Education"
+    "education": "Education",
+    "certifications": "Certifications",
+    "languages": "Languages"
   }
 }

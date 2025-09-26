@@ -1,8 +1,39 @@
 "use client";
 import { useTranslations } from "next-intl";
+import { useEffect } from "react";
 
 export default function Home() {
     const t = useTranslations("Home");
+
+    // Smooth scrolling for anchor links
+    useEffect(() => {
+        const handleAnchorClick = (event: MouseEvent) => {
+            const target = event.target as HTMLElement;
+            
+            // Find the closest anchor element
+            const anchor = target.closest('a') as HTMLAnchorElement;
+            
+            if (anchor && anchor.getAttribute('href')?.startsWith('#')) {
+                const hash = anchor.getAttribute('href');
+                if (hash) {
+                    event.preventDefault();
+                    const element = document.querySelector(hash);
+                    if (element) {
+                        element.scrollIntoView({ 
+                            behavior: "smooth",
+                            block: "start"
+                        });
+                    }
+                }
+            }
+        }
+
+        document.addEventListener("click", handleAnchorClick);
+
+        return () => {
+            document.removeEventListener("click", handleAnchorClick);
+        };
+    }, [])
 
     return (
         <div className="max-w-4xl mx-auto overflow-hidden">
@@ -198,6 +229,46 @@ export default function Home() {
                             <p className="text-sm">
                                 {edu.location}
                             </p>
+                        </div>
+                    ))}
+                </div>
+            </section>
+
+            {/* Certifications Section */}
+            <section id="certifications" className="mb-10">
+                <h2 className="text-2xl font-bold mb-6 border-b-2 border-primary pb-2">
+                    {t("certificationsTitle")}
+                </h2>
+                <div className="space-y-6">
+                    {t.raw("certificationsList").map((cert: any, index: number) => (
+                        <div
+                            key={index}
+                            className="bg-muted-foreground/10 border-l-4 border-primary/30 pl-6 pr-2 py-4 rounded-lg"
+                        >
+                            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-2">
+                                <h3 className="text-xl font-semibold">
+                                    {cert.title}
+                                </h3>
+                                <span className="text-sm">
+                                    {cert.year}
+                                </span>
+                            </div>
+                            <p className="font-medium mb-1">
+                                {cert.issuer}
+                            </p>
+                            <p className="mb-1">
+                                {t("certificationNumber")}: {cert.number}
+                            </p>
+                            {cert.link && (
+                                <a
+                                    href={cert.link}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="text-blue-600 hover:text-blue-800 underline"
+                                >
+                                    {t("viewCertificate")}
+                                </a>
+                            )}
                         </div>
                     ))}
                 </div>
