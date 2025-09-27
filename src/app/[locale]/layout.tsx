@@ -43,21 +43,17 @@ export default async function RootLayout({
     const messages = await getMessages({ locale });
 
     return (
-        <html lang={locale} suppressHydrationWarning>
-            <body
-                className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        <>
+            <ThemeProvider
+                attribute="class"
+                defaultTheme="system"
+                enableSystem
+                disableTransitionOnChange
             >
-                <ThemeProvider
-                    attribute="class"
-                    defaultTheme="system"
-                    enableSystem
-                    disableTransitionOnChange
-                >
-                    <NextIntlClientProvider locale={locale} messages={messages}>
-                        {children}
-                    </NextIntlClientProvider>
-                </ThemeProvider>
-            </body>
-        </html>
+                <NextIntlClientProvider locale={locale} messages={messages}>
+                    {children}
+                </NextIntlClientProvider>
+            </ThemeProvider>
+        </>
     );
 }
