@@ -23,7 +23,6 @@ export default function Home() {
     useEffect(() => {
         fetchSiteInfo()
         .then((data) => {
-            console.log("Site info data:", data);
             setSiteVisits(data.visits);
             setCvCounter(data.cv_downloads);
         })

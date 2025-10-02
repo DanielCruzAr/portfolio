@@ -135,5 +135,9 @@
     "email": "cruzarciniega.d@gmail.com",
     "linkedin": "linkedin.com/in/daniel-cruzar",
     "location": "Querétaro, QRO, MX"
+  },
+  "SiteInfo": {
+    "totalVisits": "Visitas Totales",
+    "cvDownloads": "Descargas de CV"
   }
 }
