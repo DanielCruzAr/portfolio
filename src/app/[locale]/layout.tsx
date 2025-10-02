@@ -6,6 +6,7 @@ import { getMessages, setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import "../globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { GlobalProvider } from "@/context/GlobalContext";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -51,7 +52,7 @@ export default async function RootLayout({
                 disableTransitionOnChange
             >
                 <NextIntlClientProvider locale={locale} messages={messages}>
-                    {children}
+                    <GlobalProvider>{children}</GlobalProvider>
                 </NextIntlClientProvider>
             </ThemeProvider>
         </>

@@ -1,60 +1,35 @@
 "use client";
 import Footer from "@/components/Footer";
 import { Navigation } from "@/components/Navigation";
+import SiteInfo from "@/components/SiteInfo";
+import { useGlobalContext } from "@/context/GlobalContext";
+import { fetchSiteInfo } from "@/lib/actions";
+import {
+    Certification,
+    Education,
+    Experience,
+    Language,
+    Project,
+    SkillCategory,
+} from "@/lib/types";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 
-// TypeScript interfaces for the data structures
-interface Experience {
-    title: string;
-    company: string;
-    period: string;
-    description: string;
-}
-
-interface Project {
-    name: string;
-    description: string;
-    technologies: string[];
-    links?: {
-        playStore?: string;
-        appStore?: string;
-        github?: string;
-    };
-}
-
-interface SkillCategory {
-    category: string;
-    skills: string[];
-}
-
-interface Education {
-    degree: string;
-    institution: string;
-    period: string;
-    location?: string;
-    extras?: string;
-    description?: string;
-}
-
-interface Certification {
-    title: string;
-    issuer: string;
-    year: string;
-    number: string;
-    link?: string;
-}
-
-interface Language {
-    language: string;
-    level: string;
-}
-
 export default function Home() {
+    const { siteVisits, cvCounter, setSiteVisits, setCvCounter } = useGlobalContext();
     const [loaded, setLoaded] = useState(false);
     const t = useTranslations("Home");
 
     useEffect(() => {
+        fetchSiteInfo()
+        .then((data) => {
+            console.log("Site info data:", data);
+            setSiteVisits(data.visits);
+            setCvCounter(data.cv_downloads);
+        })
+        .catch((error) => {
+            console.error("Error fetching site info:", error);
+        });
         setLoaded(true);
     }, []);
 
@@ -201,31 +176,36 @@ export default function Home() {
                         <div className="grid md:grid-cols-2 gap-6">
                             {t
                                 .raw("skillCategories")
-                                .map((category: SkillCategory, index: number) => (
-                                    <div
-                                        key={index}
-                                        className="bg-muted-foreground/10 border-l-4 border-primary/30 pl-6 pr-2 py-4 rounded-lg"
-                                    >
-                                        <h3 className="text-lg font-semibold mb-4">
-                                            {category.category}
-                                        </h3>
-                                        <div className="flex flex-wrap gap-2">
-                                            {category.skills.map(
-                                                (
-                                                    skill: string,
-                                                    skillIndex: number
-                                                ) => (
-                                                    <span
-                                                        key={skillIndex}
-                                                        className="px-3 py-1 bg-blue-100 text-blue-800 text-sm rounded-lg border"
-                                                    >
-                                                        {skill}
-                                                    </span>
-                                                )
-                                            )}
+                                .map(
+                                    (
+                                        category: SkillCategory,
+                                        index: number
+                                    ) => (
+                                        <div
+                                            key={index}
+                                            className="bg-muted-foreground/10 border-l-4 border-primary/30 pl-6 pr-2 py-4 rounded-lg"
+                                        >
+                                            <h3 className="text-lg font-semibold mb-4">
+                                                {category.category}
+                                            </h3>
+                                            <div className="flex flex-wrap gap-2">
+                                                {category.skills.map(
+                                                    (
+                                                        skill: string,
+                                                        skillIndex: number
+                                                    ) => (
+                                                        <span
+                                                            key={skillIndex}
+                                                            className="px-3 py-1 bg-blue-100 text-blue-800 text-sm rounded-lg border"
+                                                        >
+                                                            {skill}
+                                                        </span>
+                                                    )
+                                                )}
+                                            </div>
                                         </div>
-                                    </div>
-                                ))}
+                                    )
+                                )}
                         </div>
                     </section>
 
@@ -333,6 +313,7 @@ export default function Home() {
                 </div>
             </main>
             <Footer />
+            <SiteInfo siteVisits={siteVisits} cvCounter={cvCounter} />
         </>
     );
 }
