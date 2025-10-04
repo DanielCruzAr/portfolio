@@ -12,7 +12,7 @@ const Footer = () => {
                     <p>{t("location")}</p>
                 </div>
                 <div className="text-center">
-                    <h3 className="text-md font-semibold">Social Media</h3>
+                    <h3 className="text-md font-semibold">{t("socialMedia")}</h3>
                     <a
                         href={`https://${t("linkedin")}`}
                         target="_blank"
@@ -23,7 +23,7 @@ const Footer = () => {
                     </a>
                 </div>
                 <div className="text-center sm:text-right">
-                    <h3 className="text-md font-semibold">Contact info</h3>
+                    <h3 className="text-md font-semibold">{t("contact")}</h3>
                     <a
                         href={`mailto:${t("email")}`}
                         className="block hover:text-primary/50 transition-colors"
