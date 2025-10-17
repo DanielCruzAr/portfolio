@@ -57,12 +57,12 @@ interface GeoJSONMultiPolygon {
   coordinates: [number, number][][][];
 }
 
-type GeoJSONGeometry = 
-  | GeoJSONPoint 
-  | GeoJSONMultiPoint 
-  | GeoJSONLineString 
-  | GeoJSONMultiLineString 
-  | GeoJSONPolygon 
+type GeoJSONGeometry =
+  | GeoJSONPoint
+  | GeoJSONMultiPoint
+  | GeoJSONLineString
+  | GeoJSONMultiLineString
+  | GeoJSONPolygon
   | GeoJSONMultiPolygon;
 
 type GeoJSON = GeoJSONFeature | GeoJSONFeatureCollection | GeoJSONGeometryCollection | GeoJSONGeometry;
@@ -92,7 +92,7 @@ export function drawThreeGeo({ json, radius, materalOptions }: DrawThreeGeoParam
   let coordinate_array: [number, number][] = [];
   for (let geom_num = 0; geom_num < json_geom.length; geom_num++) {
     const geom = json_geom[geom_num];
-    
+
     if (geom.type == 'Point') {
       convertToSphereCoords(geom.coordinates, radius);
       drawParticle(x_values[0], y_values[0], z_values[0], materalOptions);
@@ -281,10 +281,12 @@ export function drawThreeGeo({ json, radius, materalOptions }: DrawThreeGeoParam
     if (Math.random() > 0.5) {
       hue -= 0.3;
     }
-    const color = new THREE.Color().setHSL(hue, 1.0, 0.5);
     const lineMaterial = new LineMaterial({
-      color,
+      color: 0xffffff,
       linewidth: 2,
+      dashSize: 0.1,
+      gapSize: 0.1,
+      dashOffset: 0.0,
       fog: true
     });
 
