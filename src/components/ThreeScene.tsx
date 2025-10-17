@@ -1,5 +1,6 @@
 "use client";
 
+import { drawThreeGeo } from "@/lib/threeGeo";
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/Addons.js";
@@ -9,6 +10,7 @@ export default function ThreeScene() {
 
   useEffect(() => {
     const scene = new THREE.Scene();
+    scene.fog = new THREE.FogExp2(0x000000, 0.2);
     const camera = new THREE.PerspectiveCamera(
       75,
       window.innerWidth / window.innerHeight,
@@ -38,15 +40,29 @@ export default function ThreeScene() {
 
     fetch('/datasets/countries.json')
       .then(response => response.text())
-      .then(data => console.log(data))
+      .then(text => {
+        const data = JSON.parse(text);
+        console.log(data);
+        const countries = drawThreeGeo({
+          json: data,
+          radius: 2,
+          materalOptions: {
+            color: 0x80FF80
+          }
+        });
+        scene.add(countries);
+      })
       .catch(error => console.log(error));
+
+    //const lat = 51.5081;
+    //const lon = -0.1278;
 
     // Animation
     const animate = () => {
       requestAnimationFrame(animate);
       // Earth-like rotation: primarily around Y-axis with slight tilt
-      // sphere.rotation.y += 0.005; // Main rotation around Y-axis (day/night cycle)
-      // sphere.rotation.x += 0.0001; // Very slight wobble on X-axis
+      // line.rotation.y += 0.005; // Main rotation around Y-axis (day/night cycle)
+      // line.rotation.x += 0.0001; // Very slight wobble on X-axis
       renderer.render(scene, camera);
       controls.update();
     };
