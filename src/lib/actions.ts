@@ -1,5 +1,5 @@
 import { BASE_API_URL } from "./constants";
-import { SiteInfoData, SiteInfoResponse } from "./types";
+import { GeoJSONFeatureCollection, SiteInfoData, SiteInfoResponse } from "./types";
 
 
 export async function incrementCVCounter(): Promise<SiteInfoResponse> {
@@ -31,5 +31,20 @@ export async function fetchSiteInfo(): Promise<SiteInfoData> {
         throw new Error("Failed to fetch site information");
     }
 
+    return res.json();
+}
+
+export async function fetchCoordinates(): Promise<GeoJSONFeatureCollection> {
+    const res = await fetch(`${BASE_API_URL}/get-coords`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    });
+
+    if (!res.ok) {
+        throw new Error("Failed to fetch coordinates");
+    }
+    
     return res.json();
 }

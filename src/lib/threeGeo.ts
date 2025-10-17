@@ -2,6 +2,7 @@ import * as THREE from "three";
 import { Line2 } from "three/examples/jsm/lines/Line2.js";
 import { LineGeometry } from "three/examples/jsm/lines/LineGeometry.js";
 import { LineMaterial } from "three/examples/jsm/lines/LineMaterial.js";
+import { DrawThreeGeoParams, GeoJSON, GeoJSONGeometry } from "./types";
 
 /* Draw GeoJSON
 
@@ -10,70 +11,7 @@ and draws the geoJSON geometries.
 
 */
 
-// Type definitions for GeoJSON
-interface GeoJSONFeature {
-  type: 'Feature';
-  geometry: GeoJSONGeometry;
-  properties?: any;
-}
-
-interface GeoJSONFeatureCollection {
-  type: 'FeatureCollection';
-  features: GeoJSONFeature[];
-}
-
-interface GeoJSONGeometryCollection {
-  type: 'GeometryCollection';
-  geometries: GeoJSONGeometry[];
-}
-
-interface GeoJSONPoint {
-  type: 'Point';
-  coordinates: [number, number];
-}
-
-interface GeoJSONMultiPoint {
-  type: 'MultiPoint';
-  coordinates: [number, number][];
-}
-
-interface GeoJSONLineString {
-  type: 'LineString';
-  coordinates: [number, number][];
-}
-
-interface GeoJSONMultiLineString {
-  type: 'MultiLineString';
-  coordinates: [number, number][][];
-}
-
-interface GeoJSONPolygon {
-  type: 'Polygon';
-  coordinates: [number, number][][];
-}
-
-interface GeoJSONMultiPolygon {
-  type: 'MultiPolygon';
-  coordinates: [number, number][][][];
-}
-
-type GeoJSONGeometry =
-  | GeoJSONPoint
-  | GeoJSONMultiPoint
-  | GeoJSONLineString
-  | GeoJSONMultiLineString
-  | GeoJSONPolygon
-  | GeoJSONMultiPolygon;
-
-type GeoJSON = GeoJSONFeature | GeoJSONFeatureCollection | GeoJSONGeometryCollection | GeoJSONGeometry;
-
-interface DrawThreeGeoParams {
-  json: GeoJSON;
-  radius: number;
-  materalOptions: THREE.PointsMaterialParameters;
-}
-
-export function drawThreeGeo({ json, radius, materalOptions }: DrawThreeGeoParams): THREE.Object3D {
+export function drawThreeGeo({ json, radius, materialOptions }: DrawThreeGeoParams): THREE.Object3D {
   const container = new THREE.Object3D();
   container.userData.update = (t: number) => {
     for (let i = 0; i < container.children.length; i++) {
@@ -95,12 +33,12 @@ export function drawThreeGeo({ json, radius, materalOptions }: DrawThreeGeoParam
 
     if (geom.type == 'Point') {
       convertToSphereCoords(geom.coordinates, radius);
-      drawParticle(x_values[0], y_values[0], z_values[0], materalOptions);
+      drawParticle(x_values[0], y_values[0], z_values[0], materialOptions);
 
     } else if (geom.type == 'MultiPoint') {
       for (let point_num = 0; point_num < geom.coordinates.length; point_num++) {
         convertToSphereCoords(geom.coordinates[point_num], radius);
-        drawParticle(x_values[0], y_values[0], z_values[0], materalOptions);
+        drawParticle(x_values[0], y_values[0], z_values[0], materialOptions);
       }
 
     } else if (geom.type == 'LineString') {
@@ -109,7 +47,7 @@ export function drawThreeGeo({ json, radius, materalOptions }: DrawThreeGeoParam
       for (let point_num = 0; point_num < coordinate_array.length; point_num++) {
         convertToSphereCoords(coordinate_array[point_num], radius);
       }
-      drawLine(x_values, y_values, z_values, materalOptions);
+      drawLine(x_values, y_values, z_values, materialOptions);
 
     } else if (geom.type == 'Polygon') {
       for (let segment_num = 0; segment_num < geom.coordinates.length; segment_num++) {
@@ -118,7 +56,7 @@ export function drawThreeGeo({ json, radius, materalOptions }: DrawThreeGeoParam
         for (let point_num = 0; point_num < coordinate_array.length; point_num++) {
           convertToSphereCoords(coordinate_array[point_num], radius);
         }
-        drawLine(x_values, y_values, z_values, materalOptions);
+        drawLine(x_values, y_values, z_values, materialOptions);
       }
 
     } else if (geom.type == 'MultiLineString') {
@@ -128,7 +66,7 @@ export function drawThreeGeo({ json, radius, materalOptions }: DrawThreeGeoParam
         for (let point_num = 0; point_num < coordinate_array.length; point_num++) {
           convertToSphereCoords(coordinate_array[point_num], radius);
         }
-        drawLine(x_values, y_values, z_values, materalOptions);
+        drawLine(x_values, y_values, z_values, materialOptions);
       }
 
     } else if (geom.type == 'MultiPolygon') {
@@ -139,7 +77,7 @@ export function drawThreeGeo({ json, radius, materalOptions }: DrawThreeGeoParam
           for (let point_num = 0; point_num < coordinate_array.length; point_num++) {
             convertToSphereCoords(coordinate_array[point_num], radius);
           }
-          drawLine(x_values, y_values, z_values, materalOptions);
+          drawLine(x_values, y_values, z_values, materialOptions);
         }
       }
     } else {
@@ -309,3 +247,28 @@ export function drawThreeGeo({ json, radius, materalOptions }: DrawThreeGeoParam
 
   return container;
 }
+
+/*
+// Example coordinates (longitude, latitude)
+const coordinates = [
+  [-74.006, 40.7128], // New York
+  [-0.1278, 51.5074], // London
+  [139.6917, 35.6895] // Tokyo
+];
+
+// Convert to GeoJSON
+const geoJsonData = {
+  type: "FeatureCollection",
+  features: coordinates.map((coord, index) => ({
+    type: "Feature",
+    geometry: {
+      type: "Point",
+      coordinates: coord
+    },
+    properties: {
+      id: index,
+      name: `Point ${index + 1}`
+    }
+  }))
+};
+*/
