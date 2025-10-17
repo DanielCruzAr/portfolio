@@ -1,13 +1,17 @@
 "use client";
 
 import { fetchCoordinates } from "@/lib/actions";
-import { drawThreeGeo } from "@/lib/threeGeo";
-import { GeoJSONFeatureCollection } from "@/lib/types";
+import { createGlowMarkerTexture, drawThreeGeo } from "@/lib/threeGeo";
+import { useTranslations } from "next-intl";
+import { useTheme } from "next-themes";
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/Addons.js";
+// import { GeoJSONFeatureCollection, GeoJSONGeometry } from "@/lib/types";
 
-const coordinates = [
+/*  TEST DATA
+// Example coordinates (longitude, latitude)
+const coordinates: [number, number][] = [
     [-74.006, 40.7128], // New York
     [-0.1278, 51.5074], // London
     [139.6917, 35.6895], // Tokyo
@@ -17,10 +21,10 @@ const coordinates = [
 const geoJsonData: GeoJSONFeatureCollection = {
     type: "FeatureCollection",
     features: coordinates.map((coord, index) => ({
-        type: "Feature" as "Feature",
+        type: "Feature",
         geometry: {
-            type: "Point" as "Point",
-            coordinates: coord as [number, number],
+            type: "Point",
+            coordinates: coord,
         },
         properties: {
             id: index,
@@ -28,13 +32,20 @@ const geoJsonData: GeoJSONFeatureCollection = {
         },
     })),
 };
+*/
 
 export default function ThreeScene() {
     const mountRef = useRef<HTMLDivElement>(null);
+    const { theme } = useTheme();
+    const t = useTranslations("Map");
 
     useEffect(() => {
         const scene = new THREE.Scene();
-        scene.fog = new THREE.FogExp2(0x000000, 0.2);
+        scene.background = new THREE.Color(
+            theme === "dark" ? 0x000000 : 0xffffff
+        );
+        const fogColor = theme === "dark" ? 0x000000 : 0xffffff;
+        scene.fog = new THREE.FogExp2(fogColor, 0.2);
         const camera = new THREE.PerspectiveCamera(
             75,
             window.innerWidth / window.innerHeight,
@@ -51,7 +62,7 @@ export default function ThreeScene() {
         // Create a sphere to represent the Earth
         const geometry = new THREE.SphereGeometry(2);
         const lineMat = new THREE.LineBasicMaterial({
-            color: 0xffffff,
+            color: theme === "dark" ? 0xffffff : 0x000000,
             transparent: true,
             opacity: 0.4,
         });
@@ -62,22 +73,8 @@ export default function ThreeScene() {
         camera.position.z = 5;
 
         // create circular sprite texture for round points
-        const createCircleTexture = (size = 128, color = "#ffffff") => {
-            const canvas = document.createElement("canvas");
-            canvas.width = canvas.height = size;
-            const ctx = canvas.getContext("2d")!;
-            ctx.clearRect(0, 0, size, size);
-            ctx.beginPath();
-            ctx.arc(size / 2, size / 2, size / 2, 0, Math.PI * 2);
-            ctx.fillStyle = color;
-            ctx.fill();
-            const texture = new THREE.CanvasTexture(canvas);
-            texture.minFilter = THREE.LinearFilter;
-            // texture.encoding = THREE.sRGBEncoding;
-            texture.needsUpdate = true;
-            return texture;
-        };
-        const circleTex = createCircleTexture(128, "#ffffff");
+        const canvas = document.createElement("canvas");
+        const markerTex = createGlowMarkerTexture(canvas);
 
         fetch("/datasets/countries.json")
             .then((response) => response.text())
@@ -87,7 +84,7 @@ export default function ThreeScene() {
                     json: data,
                     radius: 2,
                     materialOptions: {
-                        color: 0x80ff80,
+                        color: theme === "dark" ? 0xffffff : 0x000000,
                     },
                 });
                 scene.add(countries);
@@ -101,10 +98,9 @@ export default function ThreeScene() {
                     json: data,
                     radius: 2,
                     materialOptions: {
-                        color: 0x0000ff, // tint for the sprite
-                        size: 0.05,
+                        size: 0.07,
                         sizeAttenuation: true,
-                        map: circleTex,
+                        map: markerTex,
                         transparent: true,
                         alphaTest: 0.1,
                     },
@@ -129,5 +125,13 @@ export default function ThreeScene() {
         };
     }, []);
 
-    return <div ref={mountRef} />;
+    return (
+        <>
+            <div ref={mountRef} />
+            <div className="absolute top-1">
+                <h1 className="text-4xl font-bold my-2">{t("title")}</h1>
+                <p className="max-w-md">{t("description")}</p>
+            </div>
+        </>
+    );
 }
