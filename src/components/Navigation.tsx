@@ -1,13 +1,11 @@
 "use client";
 
-import { ModeToggle } from "./ModeToggle";
-import LanguageSwitcher from "./LanguageSwitcher";
 import { useParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { Button } from "./ui/button";
 import { Menu } from "lucide-react";
-import DownloadFile from "./DownloadFile";
+import Options from "./Options";
 
 const components: { key: string; href: string }[] = [
     {
@@ -141,12 +139,7 @@ export function Navigation() {
                     </div>
                 )}
             </div>
-
-            <div className="absolute top-4 right-8 flex justify-center items-center space-x-4">
-                <LanguageSwitcher />
-                <ModeToggle />
-                <DownloadFile />
-            </div>
+            <Options /> 
         </nav>
     );
 }

@@ -141,5 +141,9 @@
   "SiteInfo": {
     "totalVisits": "Total Visits",
     "cvDownloads": "CV Downloads"
+  },
+  "Map": {
+    "title": "Global Site Visitors",
+    "description": "A 3D representation of the locations from which visitors have accessed this portfolio website. Move around using the mouse or touch controls to explore the globe."
   }
 }
