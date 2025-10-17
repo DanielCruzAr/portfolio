@@ -141,5 +141,9 @@
   "SiteInfo": {
     "totalVisits": "Visitas Totales",
     "cvDownloads": "Descargas de CV"
+  },
+  "Map": {
+    "title": "Visitantes Globales del Sitio",
+    "description": "Una representación 3D de las ubicaciones desde las cuales los visitantes han accedido a este sitio web de portafolio. Muévete usando el mouse o los controles táctiles para explorar el globo."
   }
 }
