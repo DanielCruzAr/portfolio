@@ -140,7 +140,7 @@ export function drawThreeGeo({
     }
 
     function createGeometryArray(json: GeoJSON): GeoJSONGeometry[] {
-        let geometry_array: GeoJSONGeometry[] = [];
+        const geometry_array: GeoJSONGeometry[] = [];
 
         if (json.type == "Feature") {
             geometry_array.push(json.geometry);
@@ -291,7 +291,7 @@ export function drawThreeGeo({
         z: number,
         options: THREE.PointsMaterialParameters
     ): void {
-        let geo = new THREE.BufferGeometry();
+        const geo = new THREE.BufferGeometry();
         geo.setAttribute(
             "position",
             new THREE.Float32BufferAttribute([x, y, z], 3)
