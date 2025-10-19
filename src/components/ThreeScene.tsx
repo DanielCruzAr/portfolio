@@ -2,7 +2,6 @@
 
 import { fetchCoordinates } from "@/lib/actions";
 import { createGlowMarkerTexture, drawThreeGeo } from "@/lib/threeGeo";
-import { useTranslations } from "next-intl";
 import { useTheme } from "next-themes";
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
@@ -37,7 +36,6 @@ const geoJsonData: GeoJSONFeatureCollection = {
 export default function ThreeScene() {
     const mountRef = useRef<HTMLDivElement>(null);
     const { theme } = useTheme();
-    const t = useTranslations("Map");
 
     useEffect(() => {
         const scene = new THREE.Scene();
@@ -125,13 +123,5 @@ export default function ThreeScene() {
         };
     }, []);
 
-    return (
-        <>
-            <div ref={mountRef} />
-            <div className="absolute top-1">
-                <h1 className="text-4xl font-bold my-2">{t("title")}</h1>
-                <p className="max-w-md">{t("description")}</p>
-            </div>
-        </>
-    );
+    return <div ref={mountRef} />;
 }

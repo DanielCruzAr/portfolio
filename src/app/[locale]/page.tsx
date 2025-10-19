@@ -1,6 +1,4 @@
 "use client";
-import Footer from "@/components/Footer";
-import { Navigation } from "@/components/Navigation";
 import SiteInfo from "@/components/SiteInfo";
 import { useGlobalContext } from "@/context/GlobalContext";
 import { fetchSiteInfo } from "@/lib/actions";
@@ -38,8 +36,7 @@ export default function Home() {
 
     return (
         <>
-            <Navigation />
-            <main className="font-sans min-h-screen px-4 sm:px-6 lg:px-8">
+            <div>
                 <div className="max-w-4xl mx-auto overflow-hidden mt-32 sm:px-6 lg:px-8">
                     {/* Summary Section */}
                     <section id="home" className="flex justify-between mb-10">
@@ -310,8 +307,7 @@ export default function Home() {
                         </div>
                     </section>
                 </div>
-            </main>
-            <Footer />
+            </div>
             <SiteInfo siteVisits={siteVisits} cvCounter={cvCounter} />
         </>
     );

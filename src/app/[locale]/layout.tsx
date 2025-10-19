@@ -6,6 +6,8 @@ import { routing } from "@/i18n/routing";
 import "../globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { GlobalProvider } from "@/context/GlobalContext";
+import { Navigation } from "@/components/Navigation";
+import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
     title: "Daniel Cruz Arciniega - Portfolio",
@@ -41,7 +43,13 @@ export default async function RootLayout({
                 disableTransitionOnChange
             >
                 <NextIntlClientProvider locale={locale} messages={messages}>
-                    <GlobalProvider>{children}</GlobalProvider>
+                    <GlobalProvider>
+                        <Navigation />
+                        <main className="font-sans min-h-screen px-4 sm:px-6 lg:px-8">
+                            {children}
+                        </main>
+                        <Footer />
+                    </GlobalProvider>
                 </NextIntlClientProvider>
             </ThemeProvider>
         </>

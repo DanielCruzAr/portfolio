@@ -7,34 +7,38 @@ import { Button } from "./ui/button";
 import { Menu } from "lucide-react";
 import Options from "./Options";
 
-const components: { key: string; href: string }[] = [
+const items: { key: string; href: string }[] = [
     {
-        key: "summary",
-        href: "#home",
+        key: "home",
+        href: "/#home",
     },
     {
         key: "experience",
-        href: "#experience",
+        href: "/#experience",
     },
     {
         key: "projects",
-        href: "#projects",
+        href: "/#projects",
     },
     {
         key: "skills",
-        href: "#skills",
+        href: "/#skills",
     },
     {
         key: "education",
-        href: "#education",
+        href: "/#education",
     },
     {
         key: "certifications",
-        href: "#certifications",
+        href: "/#certifications",
     },
     {
         key: "languages",
-        href: "#languages",
+        href: "/#languages",
+    },
+    {
+        key: "map",
+        href: "/map",
     },
     {
         key: "contact",
@@ -47,6 +51,11 @@ export function Navigation() {
     const t = useTranslations("Navigation");
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -75,6 +84,10 @@ export function Navigation() {
         }
     };
 
+    if (!mounted) {
+        return null;
+    }
+
     return (
         <nav
             className={`fixed top-0 left-0 right-0 z-50 flex w-full py-8 px-12 
@@ -87,20 +100,23 @@ export function Navigation() {
             <div className="max-w-7xl mx-auto">
                 {/* Desktop navigation */}
                 <div className="hidden xl:flex justify-center items-center space-x-10 border-b-2 border-primary">
-                    {components.map((component) => (
-                        <div key={component.key}>
+                    {items.map((item, index) => (
+                        <div
+                            key={item.key}
+                            className="flex items-center cursor-pointer hover:text-primary/70 transition-colors"
+                        >
                             <a
                                 href={
-                                    component.href.startsWith("#")
-                                        ? component.href
-                                        : `/${locale}${component.href}`
+                                    item.href.startsWith("#")
+                                        ? item.href
+                                        : `/${locale}${item.href}`
                                 }
-                                className="text-lg hover:text-primary/70 transition-colors"
+                                className="text-lg font-medium"
                                 onClick={(e) =>
-                                    handleScrollToSection(e, component.href)
+                                    handleScrollToSection(e, item.href)
                                 }
                             >
-                                {t(component.key)}
+                                {t(item.key)}
                             </a>
                         </div>
                     ))}
@@ -119,27 +135,27 @@ export function Navigation() {
                 </Button>
                 {isMenuOpen && (
                     <div className="absolute top-full left-0 right-0 z-10 bg-background/95 backdrop-blur-sm shadow-sm flex flex-col w-[150px]">
-                        {components.map((component) => (
-                            <div key={component.key}>
+                        {items.map((item) => (
+                            <div key={item.key}>
                                 <a
                                     href={
-                                        component.href.startsWith("#")
-                                            ? component.href
-                                            : `/${locale}${component.href}`
+                                        item.href.startsWith("#")
+                                            ? item.href
+                                            : `/${locale}${item.href}`
                                     }
                                     className="block py-2 px-4 text-lg hover:text-primary/70 transition-colors"
                                     onClick={(e) =>
-                                        handleScrollToSection(e, component.href)
+                                        handleScrollToSection(e, item.href)
                                     }
                                 >
-                                    {t(component.key)}
+                                    {t(item.key)}
                                 </a>
                             </div>
                         ))}
                     </div>
                 )}
             </div>
-            <Options /> 
+            <Options />
         </nav>
     );
 }
