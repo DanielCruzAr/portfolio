@@ -2,14 +2,14 @@
 
 import { fetchCoordinates } from "@/lib/actions";
 import { createGlowMarkerTexture, drawThreeGeo } from "@/lib/threeGeo";
-import { useTranslations } from "next-intl";
 import { useTheme } from "next-themes";
-import { useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/Addons.js";
-// import { GeoJSONFeatureCollection, GeoJSONGeometry } from "@/lib/types";
+import { GeoJSONFeatureCollection } from "@/lib/types";
 
-/*  TEST DATA
+// TEST DATA
+/*
 // Example coordinates (longitude, latitude)
 const coordinates: [number, number][] = [
     [-74.006, 40.7128], // New York
@@ -37,9 +37,47 @@ const geoJsonData: GeoJSONFeatureCollection = {
 export default function ThreeScene() {
     const mountRef = useRef<HTMLDivElement>(null);
     const { theme } = useTheme();
-    const t = useTranslations("Map");
+    const [countries, setCountries] = useState<GeoJSONFeatureCollection | null>(
+        null
+    );
+    const [points, setPoints] = useState<THREE.Object3D | null>(null);
 
     useEffect(() => {
+        // create circular sprite texture for round points
+        const canvas = document.createElement("canvas");
+        const markerTex = createGlowMarkerTexture(canvas);
+
+        fetch("/datasets/countries.json")
+            .then((response) => response.text())
+            .then((text) => {
+                const data = JSON.parse(text);
+                setCountries(data);
+            })
+            .catch((error) => console.log(error));
+
+        // Fetch coordinates
+        fetchCoordinates()
+            .then((data) => {
+                const points = drawThreeGeo({
+                    json: data,
+                    radius: 2,
+                    materialOptions: {
+                        size: 0.09,
+                        sizeAttenuation: true,
+                        map: markerTex,
+                        transparent: true,
+                        alphaTest: 0.1,
+                    },
+                });
+                setPoints(points);
+            })
+            .catch((error) => console.log(error));
+    }, []);
+
+    useEffect(() => {
+        if (!countries || !points) return;
+
+        // This function can be used to update the scene when countries or points change
         const scene = new THREE.Scene();
         scene.background = new THREE.Color(
             theme === "dark" ? 0x000000 : 0xffffff
@@ -72,42 +110,16 @@ export default function ThreeScene() {
 
         camera.position.z = 5;
 
-        // create circular sprite texture for round points
-        const canvas = document.createElement("canvas");
-        const markerTex = createGlowMarkerTexture(canvas);
-
-        fetch("/datasets/countries.json")
-            .then((response) => response.text())
-            .then((text) => {
-                const data = JSON.parse(text);
-                const countries = drawThreeGeo({
-                    json: data,
-                    radius: 2,
-                    materialOptions: {
-                        color: theme === "dark" ? 0xffffff : 0x000000,
-                    },
-                });
-                scene.add(countries);
-            })
-            .catch((error) => console.log(error));
-
-        // Fetch coordinates
-        fetchCoordinates()
-            .then((data) => {
-                const points = drawThreeGeo({
-                    json: data,
-                    radius: 2,
-                    materialOptions: {
-                        size: 0.07,
-                        sizeAttenuation: true,
-                        map: markerTex,
-                        transparent: true,
-                        alphaTest: 0.1,
-                    },
-                });
-                scene.add(points);
-            })
-            .catch((error) => console.log(error));
+        const countriesGeo = drawThreeGeo({
+            json: countries,
+            radius: 2,
+            materialOptions: {
+                color: theme === "dark" ? 0xffffff : 0x000000,
+            },
+        });
+        
+        scene.add(countriesGeo);
+        scene.add(points);
 
         // Animation
         const animate = () => {
@@ -123,15 +135,7 @@ export default function ThreeScene() {
         return () => {
             mountRef.current!.removeChild(renderer.domElement);
         };
-    }, []);
+    }, [theme, countries, points]);
 
-    return (
-        <>
-            <div ref={mountRef} />
-            <div className="absolute top-1">
-                <h1 className="text-4xl font-bold my-2">{t("title")}</h1>
-                <p className="max-w-md">{t("description")}</p>
-            </div>
-        </>
-    );
+    return <div ref={mountRef} />;
 }

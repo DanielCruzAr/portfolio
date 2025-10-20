@@ -129,7 +129,9 @@
     "education": "Educación",
     "certifications": "Certificaciones",
     "languages": "Idiomas",
-    "contact": "Contacto"
+    "contact": "Contacto",
+    "home": "Inicio",
+    "map": "Mapa"
   },
   "Footer": {
     "socialMedia": "Redes Sociales",
