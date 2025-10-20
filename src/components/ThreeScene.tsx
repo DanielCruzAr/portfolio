@@ -7,6 +7,7 @@ import { useState, useEffect, useRef } from "react";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/Addons.js";
 import { GeoJSONFeatureCollection } from "@/lib/types";
+import Loader from "./Loader";
 
 // TEST DATA
 /*
@@ -41,8 +42,10 @@ export default function ThreeScene() {
         null
     );
     const [points, setPoints] = useState<THREE.Object3D | null>(null);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
+        setIsLoading(true);
         // create circular sprite texture for round points
         const canvas = document.createElement("canvas");
         const markerTex = createGlowMarkerTexture(canvas);
@@ -72,6 +75,7 @@ export default function ThreeScene() {
                 setPoints(points);
             })
             .catch((error) => console.log(error));
+        setIsLoading(false);
     }, []);
 
     useEffect(() => {
@@ -117,10 +121,10 @@ export default function ThreeScene() {
                 color: theme === "dark" ? 0xffffff : 0x000000,
             },
         });
-        
+
         scene.add(countriesGeo);
         scene.add(points);
-
+        
         // Animation
         const animate = () => {
             requestAnimationFrame(animate);
@@ -136,6 +140,10 @@ export default function ThreeScene() {
             mountRef.current!.removeChild(renderer.domElement);
         };
     }, [theme, countries, points]);
+
+    if (isLoading) {
+        return <Loader />;
+    }
 
     return <div ref={mountRef} />;
 }
