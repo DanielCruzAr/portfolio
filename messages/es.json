@@ -60,7 +60,7 @@
     
     "skillCategories": [
       {
-        "category": "Programming Languages",
+        "category": "Lenguajes de Programación",
         "skills": ["Python", "JavaScript", "Java", "Dart"]
       },
       {
@@ -76,12 +76,16 @@
         "skills": ["React Native", "Flutter", "iOS Development", "Android Development"]
       },
       {
-        "category": "Database",
+        "category": "Bases de Datos",
         "skills": ["PostgreSQL", "MongoDB", "MySQL", "Redis", "SqlLite"]
       },
       {
         "category": "Cloud & DevOps",
         "skills": ["AWS", "Docker", "Kubernetes", "CI/CD", "Git", "Jenkins"]
+      },
+      {
+        "category": "IA & Análisis de Datos",
+        "skills": ["Pandas", "NumPy", "Scikit-Learn", "Kibana", "Elasticsearch", "TensorFlow", "Langchain", "Pinecone", "Copilot", "Hugging Face"]
       }
     ],
     
@@ -96,6 +100,11 @@
         }
       },
       {
+        "name": "Proyecto API de Chatbot IA",
+        "description": "API en Node.js para mantener una conversación amigable con una IA que imita habilidades de conversación humana. La conversación se almacenó en una base de datos vectorial para que el modelo solo procese la parte más relevante de la conversación en lugar de la conversación completa. El modelo fue entrenado usando Python.",
+        "technologies": ["Node.js", "TypeScript", "Express.js", "Langchain", "Pinecone", "MongoDB", "Hugging Face", "Google Colab", "Python"]
+      },
+      {
         "name": "Sistema de Gestión de Reservaciones para Club Campestre",
         "description": "Sistema de gestión de reservas que incluye una aplicación web para el personal y una aplicación móvil para los miembros de un club de campo. La aplicación móvil permite a los miembros rastrear su hándicap de golf registrando golpes sin necesidad de conexión a Internet.",
         "technologies": ["React", "React Native", "Django", "Docker", "Celery", "Celery-Beat", "Redis", "Pandas", "PostgreSQL", "SQLite"]
@@ -106,6 +115,14 @@
         "technologies": ["React", "TypeScript", "Spring Boot", "Java", "Stripe", "MySQL", "Docker", "Solr", "Eureka Server", "Azure DevOps"],
         "links": {
           "github": "https://github.com/TC3005B-561-marzo-2023"
+        }
+      },
+      {
+        "name": "Proyecto de Clasificación de Imágenes de Perros IA",
+        "description": "Modelo de IA para clasificar la raza de un perro dado una imagen.",
+        "technologies": ["Python", "TensorFlow", "Pandas", "NumPy", "Matplotlib", "Google Colab"],
+        "links": {
+          "github": "https://github.com/DanielCruzAr/ai-dog-image-classification"
         }
       }
     ],
