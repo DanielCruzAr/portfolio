@@ -168,25 +168,25 @@ export default function ThreeScene() {
             // Traverse the scene and dispose geometries/materials/textures to avoid memory leaks
             scene.traverse((obj) => {
                 // dispose geometry
-                // @ts-ignore - runtime check
+                // @ts-expect-error - runtime check
                 if (obj.geometry) {
-                    // @ts-ignore
+                    // @ts-expect-error - geometry disposal
                     obj.geometry.dispose();
                 }
                 // dispose material(s)
-                // @ts-ignore - runtime check
+                // @ts-expect-error - runtime check
                 if (obj.material) {
-                    // @ts-ignore
+                    // @ts-expect-error - material can be an array or single material
                     if (Array.isArray(obj.material)) {
-                        // @ts-ignore
+                        // @ts-expect-error - array of materials
                         obj.material.forEach((m) => {
                             if (m.map) m.map.dispose();
                             m.dispose();
                         });
                     } else {
-                        // @ts-ignore
+                        // @ts-expect-error - single material
                         if (obj.material.map) obj.material.map.dispose();
-                        // @ts-ignore
+                        // @ts-expect-error - single material
                         obj.material.dispose();
                     }
                 }
