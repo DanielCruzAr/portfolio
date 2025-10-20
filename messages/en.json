@@ -82,6 +82,10 @@
       {
         "category": "Cloud & DevOps",
         "skills": ["AWS", "Docker", "Kubernetes", "CI/CD", "Git", "Jenkins"]
+      },
+      {
+        "category": "AI & Data Analysis",
+        "skills": ["Pandas", "NumPy", "Scikit-Learn", "Kibana", "Elasticsearch", "TensorFlow", "Langchain", "Pinecone", "Copilot", "Hugging Face"]
       }
     ],
     
@@ -101,11 +105,24 @@
         "technologies": ["React", "React Native", "Django", "Docker", "Celery", "Celery-Beat", "Redis", "Pandas", "PostgreSQL", "SQLite"]
       },
       {
+        "name": "AI Chatbot API Project",
+        "description": "Node API  to have a friendly conversation with an AI mimicking human conversation skills. The conversation was stored in a vector database so that the model only has to process the most relevant part of the conversation instead of the entire conversation. The model was trained using Python.",
+        "technologies": ["Node.js", "TypeScript", "Express.js", "Langchain", "Pinecone", "MongoDB", "Hugging Face", "Google Colab", "Python"]
+      },
+      {
         "name": "Car E-commerce",
         "description": "Car e-commerce platform. The project was divided into 4 micro-services (users, dealers, cars & sales).",
         "technologies": ["React", "TypeScript", "Spring Boot", "Java", "Stripe", "MySQL", "Docker", "Solr", "Eureka Server", "Azure DevOps"],
         "links": {
           "github": "https://github.com/TC3005B-561-marzo-2023"
+        }
+      },
+      {
+        "name": "AI dog image classification project",
+        "description": "AI model to classify a dog’s breed given an image.",
+        "technologies": ["Python", "TensorFlow", "Pandas", "NumPy", "Matplotlib", "Google Colab"],
+        "links": {
+          "github": "https://github.com/DanielCruzAr/ai-dog-image-classification"
         }
       }
     ],
