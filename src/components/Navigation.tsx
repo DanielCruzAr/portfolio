@@ -1,6 +1,6 @@
 "use client";
 
-import { useParams } from "next/navigation";
+import { useParams, usePathname } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { Button } from "./ui/button";
@@ -13,30 +13,6 @@ const items: { key: string; href: string }[] = [
         href: "/#home",
     },
     {
-        key: "experience",
-        href: "/#experience",
-    },
-    {
-        key: "projects",
-        href: "/#projects",
-    },
-    {
-        key: "skills",
-        href: "/#skills",
-    },
-    {
-        key: "education",
-        href: "/#education",
-    },
-    {
-        key: "certifications",
-        href: "/#certifications",
-    },
-    {
-        key: "languages",
-        href: "/#languages",
-    },
-    {
         key: "map",
         href: "/map",
     },
@@ -46,12 +22,40 @@ const items: { key: string; href: string }[] = [
     },
 ];
 
+const homeItems: { key: string; href: string }[] = [
+    {
+        key: "experience",
+        href: "#experience",
+    },
+    {
+        key: "projects",
+        href: "#projects",
+    },
+    {
+        key: "skills",
+        href: "#skills",
+    },
+    {
+        key: "education",
+        href: "#education",
+    },
+    {
+        key: "certifications",
+        href: "#certifications",
+    },
+    {
+        key: "languages",
+        href: "#languages",
+    },
+];
+
 export function Navigation() {
     const { locale } = useParams() as { locale: string };
     const t = useTranslations("Navigation");
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [mounted, setMounted] = useState(false);
+    const pathname = usePathname();
 
     useEffect(() => {
         setMounted(true);
@@ -121,6 +125,23 @@ export function Navigation() {
                         </div>
                     ))}
                 </div>
+                {(pathname === "/en/" || pathname === "/es/") && (
+                <div className="flex items-center space-x-4">
+                    {homeItems.map((item) => (
+                        <div
+                            key={item.key}
+                        >
+                            <a
+                                href={item.href}
+                                className="block py-2 px-2 hover:text-primary/70 transition-colors"
+                                onClick={(e) => handleScrollToSection(e, item.href)}
+                            >
+                                {t(item.key)}
+                            </a>
+                        </div>
+                    ))}
+                </div>
+                )}
             </div>
 
             {/* Mobile navigation - can be added later if needed */}
