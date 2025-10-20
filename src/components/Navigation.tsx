@@ -10,7 +10,7 @@ import Options from "./Options";
 const items: { key: string; href: string }[] = [
     {
         key: "home",
-        href: "/#home",
+        href: "/",
     },
     {
         key: "map",
@@ -110,11 +110,7 @@ export function Navigation() {
                             className="flex items-center cursor-pointer hover:text-primary/70 transition-colors"
                         >
                             <a
-                                href={
-                                    item.href.startsWith("#")
-                                        ? item.href
-                                        : `/${locale}${item.href}`
-                                }
+                                href={`/${locale}${item.href}`}
                                 className="text-lg font-medium"
                                 onClick={(e) =>
                                     handleScrollToSection(e, item.href)
