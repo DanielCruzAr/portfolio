@@ -50,17 +50,16 @@ export default function ThreeScene() {
         const canvas = document.createElement("canvas");
         const markerTex = createGlowMarkerTexture(canvas);
 
-        fetch("/datasets/countries.json")
-            .then((response) => response.text())
-            .then((text) => {
-                const data = JSON.parse(text);
-                setCountries(data);
-            })
-            .catch((error) => console.log(error));
-
-        // Fetch coordinates
-        fetchCoordinates()
-            .then((data) => {
+        Promise.all([
+            fetch("/datasets/countries.json")
+                .then((response) => response.text())
+                .then((text) => {
+                    const data = JSON.parse(text);
+                    setCountries(data);
+                    return data;
+                }),
+            // Fetch coordinates
+            fetchCoordinates().then((data) => {
                 const points = drawThreeGeo({
                     json: data,
                     radius: 2,
@@ -73,9 +72,16 @@ export default function ThreeScene() {
                     },
                 });
                 setPoints(points);
+                return points;
+            }),
+        ])
+            .then(() => {
+                setIsLoading(false);
             })
-            .catch((error) => console.log(error));
-        setIsLoading(false);
+            .catch((error) => {
+                console.log(error);
+                setIsLoading(false);
+            });
     }, []);
 
     useEffect(() => {
@@ -124,7 +130,7 @@ export default function ThreeScene() {
 
         scene.add(countriesGeo);
         scene.add(points);
-        
+
         // Animation
         const animate = () => {
             requestAnimationFrame(animate);
@@ -136,8 +142,55 @@ export default function ThreeScene() {
         };
         animate();
 
+        // Cleanup on unmount
         return () => {
-            mountRef.current!.removeChild(renderer.domElement);
+            // Only remove the renderer DOM element if it's still mounted
+            if (
+                mountRef.current &&
+                renderer.domElement &&
+                mountRef.current.contains(renderer.domElement)
+            ) {
+                mountRef.current.removeChild(renderer.domElement);
+            }
+
+            // Dispose renderer and controls to free GPU resources
+            try {
+                renderer.dispose();
+            } catch (e) {
+                // ignore disposal errors
+            }
+            try {
+                controls.dispose();
+            } catch (e) {
+                // ignore disposal errors
+            }
+
+            // Traverse the scene and dispose geometries/materials/textures to avoid memory leaks
+            scene.traverse((obj) => {
+                // dispose geometry
+                // @ts-ignore - runtime check
+                if (obj.geometry) {
+                    // @ts-ignore
+                    obj.geometry.dispose();
+                }
+                // dispose material(s)
+                // @ts-ignore - runtime check
+                if (obj.material) {
+                    // @ts-ignore
+                    if (Array.isArray(obj.material)) {
+                        // @ts-ignore
+                        obj.material.forEach((m) => {
+                            if (m.map) m.map.dispose();
+                            m.dispose();
+                        });
+                    } else {
+                        // @ts-ignore
+                        if (obj.material.map) obj.material.map.dispose();
+                        // @ts-ignore
+                        obj.material.dispose();
+                    }
+                }
+            });
         };
     }, [theme, countries, points]);
 
