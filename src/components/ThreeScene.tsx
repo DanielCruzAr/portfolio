@@ -79,7 +79,6 @@ export default function ThreeScene() {
     }, []);
 
     useEffect(() => {
-        console.log("Theme changed to:", theme);
         if (!countries || !points) return;
 
         // This function can be used to update the scene when countries or points change
@@ -125,7 +124,7 @@ export default function ThreeScene() {
 
         scene.add(countriesGeo);
         scene.add(points);
-
+        
         // Animation
         const animate = () => {
             requestAnimationFrame(animate);
