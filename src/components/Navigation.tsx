@@ -72,6 +72,13 @@ export function Navigation() {
         };
     }, []);
 
+    const getMobileMenuItems = () => {
+        if (pathname === "/en/" || pathname === "/es/") {
+            return [...items, ...homeItems];
+        }
+        return items;
+    };
+
     const handleScrollToSection = (
         e: React.MouseEvent<HTMLAnchorElement>,
         href: string
@@ -101,9 +108,9 @@ export function Navigation() {
                                 : "bg-transparent"
                         }`}
         >
-            <div className="max-w-7xl mx-auto">
+            <div className="hidden xl:block max-w-7xl mx-auto">
                 {/* Desktop navigation */}
-                <div className="hidden xl:flex justify-center items-center space-x-10 border-b-2 border-primary">
+                <div className="flex justify-center items-center space-x-10 border-b-2 border-primary">
                     {items.map((item, index) => (
                         <div
                             key={item.key}
@@ -111,7 +118,7 @@ export function Navigation() {
                         >
                             <a
                                 href={`/${locale}${item.href}`}
-                                className="text-lg font-medium"
+                                className="text-2xl font-medium"
                                 onClick={(e) =>
                                     handleScrollToSection(e, item.href)
                                 }
@@ -152,7 +159,7 @@ export function Navigation() {
                 </Button>
                 {isMenuOpen && (
                     <div className="absolute top-full left-0 right-0 z-10 bg-background/95 backdrop-blur-sm shadow-sm flex flex-col w-[150px]">
-                        {items.map((item) => (
+                        {getMobileMenuItems().map((item) => (
                             <div key={item.key}>
                                 <a
                                     href={

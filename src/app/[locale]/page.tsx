@@ -37,7 +37,7 @@ export default function Home() {
     return (
         <>
             <div>
-                <div className="max-w-4xl mx-auto overflow-hidden mt-32 sm:px-6 lg:px-8">
+                <div className="max-w-4xl mx-auto overflow-hidden mt-32 xl:mt-36 sm:px-6 lg:px-8">
                     {/* Summary Section */}
                     <section id="home" className="flex justify-between mb-10">
                         <div>
