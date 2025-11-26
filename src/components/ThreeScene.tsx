@@ -8,6 +8,7 @@ import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/Addons.js";
 import { GeoJSONFeatureCollection } from "@/lib/types";
 import Loader from "./Loader";
+import { useGlobalContext } from "@/context/GlobalContext";
 
 // TEST DATA
 /*
@@ -38,6 +39,7 @@ const geoJsonData: GeoJSONFeatureCollection = {
 export default function ThreeScene() {
     const mountRef = useRef<HTMLDivElement>(null);
     const { theme } = useTheme();
+    const { dateFilter } = useGlobalContext();
     const [countries, setCountries] = useState<GeoJSONFeatureCollection | null>(
         null
     );
@@ -59,7 +61,7 @@ export default function ThreeScene() {
                     return data;
                 }),
             // Fetch coordinates
-            fetchCoordinates().then((data) => {
+            fetchCoordinates(dateFilter).then((data) => {
                 const points = drawThreeGeo({
                     json: data,
                     radius: 2,
@@ -82,10 +84,10 @@ export default function ThreeScene() {
                 console.log(error);
                 setIsLoading(false);
             });
-    }, []);
+    }, [dateFilter]);
 
     useEffect(() => {
-        if (!countries || !points) return;
+        if (!countries || !points || !mountRef.current) return;
 
         // This function can be used to update the scene when countries or points change
         const scene = new THREE.Scene();
@@ -102,7 +104,7 @@ export default function ThreeScene() {
         );
         const renderer = new THREE.WebGLRenderer({ antialias: true });
         renderer.setSize(window.innerWidth, window.innerHeight);
-        mountRef.current!.appendChild(renderer.domElement);
+        mountRef.current.appendChild(renderer.domElement);
 
         const controls = new OrbitControls(camera, renderer.domElement);
         controls.enableDamping = true;

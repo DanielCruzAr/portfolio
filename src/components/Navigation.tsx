@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { Button } from "./ui/button";
 import { Menu } from "lucide-react";
 import Options from "./Options";
+import { useGlobalContext } from "@/context/GlobalContext";
 
 const items: { key: string; href: string }[] = [
     {
@@ -49,7 +50,39 @@ const homeItems: { key: string; href: string }[] = [
     },
 ];
 
+const mapItems: { key: string, value: number }[] = [
+    {
+        key: "1day",
+        value: 0,
+    },
+    {
+        key: "3days",
+        value: 1,
+    },
+    {
+        key: "7days",
+        value: 2,
+    },
+    {
+        key: "14days",
+        value: 3,
+    },
+    {
+        key: "30days",
+        value: 4,
+    },
+    {
+        key: "90days",
+        value: 5,
+    },
+    {
+        key: "all",
+        value: 6,
+    },
+];
+
 export function Navigation() {
+    const { dateFilter, setDateFilter } = useGlobalContext();
     const { locale } = useParams() as { locale: string };
     const t = useTranslations("Navigation");
     const [isScrolled, setIsScrolled] = useState(false);
@@ -138,6 +171,26 @@ export function Navigation() {
                                 href={item.href}
                                 className="block py-2 px-2 hover:text-primary/70 transition-colors"
                                 onClick={(e) => handleScrollToSection(e, item.href)}
+                            >
+                                {t(item.key)}
+                            </a>
+                        </div>
+                    ))}
+                </div>
+                )}
+                {(pathname === "/en/map/" || pathname === "/es/map/") && (
+                <div className="flex items-center space-x-4">
+                    {mapItems.map((item) => (
+                        <div
+                            key={item.key}
+                        >
+                            <a
+                                className={`block py-2 px-2 hover:text-primary/70 transition-colors cursor-pointer ${
+                                    dateFilter === item.value
+                                        ? "text-primary font-bold underline"
+                                        : ""
+                                }`}
+                                onClick={() => setDateFilter(item.value)}
                             >
                                 {t(item.key)}
                             </a>
