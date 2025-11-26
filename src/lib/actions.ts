@@ -34,8 +34,8 @@ export async function fetchSiteInfo(): Promise<SiteInfoData> {
     return res.json();
 }
 
-export async function fetchCoordinates(): Promise<GeoJSONFeatureCollection> {
-    const res = await fetch(`${BASE_API_URL}/get-coords`, {
+export async function fetchCoordinates(dateFilter: number): Promise<GeoJSONFeatureCollection> {
+    const res = await fetch(`${BASE_API_URL}/get-coords?range=${dateFilter}`, {
         method: "GET",
         headers: {
             "Content-Type": "application/json",

@@ -148,7 +148,14 @@
     "languages": "Languages",
     "contact": "Contact",
     "home": "Home",
-    "map": "Map"
+    "map": "Map",
+    "1day": "1 Day",
+    "3days": "3 Days",
+    "7days": "1 Week",
+    "14days": "2 Weeks",
+    "30days": "1 Month",
+    "90days": "3 Months",
+    "all": "All Time"
   },
   "Footer": {
     "socialMedia": "Social Media",
