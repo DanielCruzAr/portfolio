@@ -19,9 +19,15 @@
     
     "experienceList": [
       {
+        "title": "AI Engineer",
+        "company": "PwC Mexico",
+        "period": "2025 - Present",
+        "description": "Design and build software solutions for assigned client projects, ensuring high-quality deliverables and timely execution."
+      },
+      {
         "title": "Full Stack Developer",
         "company": "OVERCODE SOLUTIONS",
-        "period": "2024 - Present",
+        "period": "2024 - 2025",
         "description": "Build and optimize backend services with Django, focusing on query performance and scalability. Automate unit tests. Develop and maintain mobile applications. Collaborate in a team environment using Git for version control and code collaboration. Participate in code reviews, feature planning, and continuous improvement of development workflows."
       },
       {
