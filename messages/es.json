@@ -19,9 +19,15 @@
     
     "experienceList": [
       {
+        "title": "Ingeniero de IA",
+        "company": "PwC México",
+        "period": "2025 - Presente",
+        "description": "Diseñar y construir soluciones de software para proyectos de clientes asignados, asegurando entregables de alta calidad y ejecución óptima."
+      },
+      {
         "title": "Desarrollador Full Stack",
         "company": "OVERCODE SOLUTIONS",
-        "period": "2024 - Presente",
+        "period": "2024 - 2025",
         "description": "Construir y optimizar servicios backend con Django, centrándose en el rendimiento de las consultas y la escalabilidad. Automatizar pruebas unitarias. Desarrollar y mantener aplicaciones móviles. Colaborar en un entorno de equipo utilizando Git para el control de versiones y la colaboración en el código. Participar en revisiones de código, planificación de funciones y mejora continua de los flujos de trabajo de desarrollo."
       },
       {
